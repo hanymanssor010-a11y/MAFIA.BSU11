@@ -1,0 +1,365 @@
+/* ===== إعدادات عامة ===== */
+body{
+    font-family: Arial, sans-serif;
+    background:#000;
+    color:#fff;
+    text-align:center;
+    margin:0;
+    overflow-x:hidden;
+    padding-top:60px; /* نفس ارتفاع الشريط + بعض المسافة */
+}
+
+/* ===== لوجو نيون أبيض نابض (مرن بالكامل) ===== */
+.logo-neon {
+    width: 20%;          /* نسبة من عرض الشاشة */
+    max-width: 220px;    /* الحد الأقصى على الشاشات الكبيرة */
+    min-width: 120px;    /* الحد الأدنى على الشاشات الصغيرة */
+    height: auto;        /* يحافظ على النسبة */
+    display: block;
+    margin: 20px auto;
+    filter: brightness(1.2);
+    animation: neonPulse 2s infinite ease-in-out;
+}
+
+/* تأثير التوهج الأبيض */
+@keyframes neonPulse {
+    0% {
+        filter: brightness(1) drop-shadow(0 0 5px #ffffff)
+                drop-shadow(0 0 10px #ffffff)
+                drop-shadow(0 0 20px #ffffff);
+        transform: scale(1);
+    }
+
+    50% {
+        filter: brightness(1.5) drop-shadow(0 0 15px #ffffff)
+                drop-shadow(0 0 30px #ffffff)
+                drop-shadow(0 0 60px #ffffff);
+        transform: scale(1.05);
+    }
+
+    100% {
+        filter: brightness(1) drop-shadow(0 0 5px #ffffff)
+                drop-shadow(0 0 10px #ffffff)
+                drop-shadow(0 0 20px #ffffff);
+        transform: scale(1);
+    }
+}
+
+/* ===== TEAM MAFIA أبيض مشع + شرارات ===== */
+.main-title{
+    position: relative;
+    display: inline-block;
+    font-size: clamp(24px, 5vw, 45px); /* يتكيف تلقائيًا */
+    letter-spacing:4px;
+    color:white;
+    animation:whiteGlow 2s infinite alternate;
+    cursor:pointer;
+}
+
+.main-title::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,255,255,0.3) 2%, transparent 10%);
+    opacity: 0;
+    filter: blur(6px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s;
+}
+
+.main-title:hover::before {
+    opacity: 1;
+    animation: flySparks 0.8s linear infinite;
+}
+
+@keyframes flySparks {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(0); }
+    25% { transform: translate(-50%, -50%) rotate(45deg) translateX(5px); }
+    50% { transform: translate(-50%, -50%) rotate(90deg) translateX(-5px); }
+    75% { transform: translate(-50%, -50%) rotate(135deg) translateX(5px); }
+    100% { transform: translate(-50%, -50%) rotate(180deg) translateX(-5px); }
+}
+
+/* ===== الشعار ===== */
+.slogan{
+    font-size: clamp(14px, 2.5vw, 20px);
+    margin-top:10px;
+    animation:whiteGlow 2s infinite alternate;
+}
+
+/* ===== أنيميشن الأبيض المشع ===== */
+@keyframes whiteGlow{
+    from{ text-shadow:0 0 5px white, 0 0 10px white; }
+    to{ text-shadow:0 0 25px white, 0 0 50px white; }
+}
+
+/* ===== المواد ===== */
+.subjects{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:2%;
+    margin-top:40px;
+}
+
+/* ===== الكروت (مرنة) ===== */
+.card{
+  position: relative;
+  overflow: hidden;
+  background:#0b0b1a;
+  border:2px solid #00ffff;
+  border-radius:15px;
+  width: 90%;           /* بدل 230px */
+  max-width: 250px;     /* الحد الأقصى على الشاشات الكبيرة */
+  padding:2%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:0 0 20px #00ffff, 0 0 40px #00ffff inset;
+  color:white;
+  text-shadow:0 0 5px #00ffff, 0 0 15px #00ffff;
+}
+
+/* ===== دخان داخل الكرت ===== */
+.card .smoke {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle, rgba(0,255,255,0.05) 0%, transparent 70%);
+  z-index:0;
+  pointer-events:none;
+  border-radius:15px;
+  animation: smokeMove 6s linear infinite;
+}
+
+/* ===== شرارات داخل الكرت ===== */
+.card .sparks {
+  position: absolute;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle, rgba(0,255,255,0.2) 1%, transparent 3%) repeat;
+  background-size: 10px 10px;
+  animation: sparksMove 4s linear infinite;
+  pointer-events:none;
+  z-index:1;
+}
+
+/* ===== النصوص مشعة ===== */
+.subject-icon{
+  position: relative;
+  z-index:2;
+  margin-bottom:15px;
+  color:white;
+  font-size:24px;
+  text-shadow:0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+  animation: textGlow 2s infinite alternate;
+}
+
+@keyframes smokeMove {
+  0% { transform: translate(0,0) scale(1); opacity: 0.2; }
+  25% { transform: translate(5px,5px) scale(1.05); opacity: 0.25; }
+  50% { transform: translate(-5px,10px) scale(1.1); opacity: 0.3; }
+  75% { transform: translate(10px,-5px) scale(1.05); opacity: 0.25; }
+  100% { transform: translate(0,0) scale(1); opacity: 0.2; }
+}
+
+@keyframes sparksMove {
+  0% { background-position:0 0; }
+  25% { background-position:50% 50%; }
+  50% { background-position:100% 0; }
+  75% { background-position:50% 50%; }
+  100% { background-position:0 0; }
+}
+
+@keyframes textGlow {
+  from { text-shadow:0 0 5px #00ffff, 0 0 10px #00ffff; }
+  to { text-shadow:0 0 25px #00ffff, 0 0 50px #00ffff; }
+}
+
+/* ===== الأزرار ===== */
+.btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 20px;
+    background:#001f5c;
+    color:white;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 20px #001f5c;
+}
+
+/* ===== صفحات المواد ===== */
+.subject-title{
+    margin-top:30px;
+    font-size: clamp(20px, 3vw, 32px);
+    animation:blueGlow 2s infinite alternate;
+}
+
+.counter{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin:20px auto;
+}
+
+.team-name{
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing:4px;
+    animation:whiteGlow 2s infinite alternate;
+}
+
+.team-sub{
+    margin-top:10px;
+    font-size: clamp(14px, 2vw, 18px);
+    animation:whiteGlow 2s infinite alternate;
+}
+
+.content-box{
+    background:#111;
+    border:1px solid #001f5c;
+    border-radius:15px;
+    width:90%;            /* بدل width ثابت */
+    max-width:500px;
+    margin:25px auto;
+    padding:2%;
+    transition:0.3s;
+    text-shadow:0 0 5px white;
+}
+
+.content-box:hover{
+    box-shadow:0 0 25px #001f5c;
+    transform:translateY(-5px);
+}
+
+.link{
+    display:block;
+    padding:10px;
+    margin:8px 0;
+    background:#000;
+    color:white;
+    border-radius:10px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.link:hover{
+    background:#001f5c;
+    transform:scale(1.05);
+}
+
+/* ===== أنيميشن دخول الكروت ===== */
+@keyframes cardFadeIn{
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== خلفية دخان نيون متحرك شفاف + شرار ===== */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-2;
+    pointer-events:none;
+    background: radial-gradient(circle at 30% 30%, rgba(0,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(0,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0,255,255,0.05) 0%, transparent 50%);
+    background-size: 200% 200%;
+    animation: smokeBackground 20s linear infinite;
+}
+
+@keyframes smokeBackground {
+    0% { background-position: 0% 0%, 50% 50%, 100% 100%; }
+    50% { background-position: 50% 50%, 100% 100%, 0% 0%; }
+    100% { background-position: 0% 0%, 50% 50%, 100% 100%; }
+}
+
+/* ===== شرار كهرباء خفيف ===== */
+body::after{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle, rgba(0,255,255,0.15) 1%, transparent 2%) repeat;
+    background-size: 20px 20px;
+    animation: sparks 3s linear infinite;
+    z-index:-1;
+    pointer-events:none;
+}
+
+/* ===== دخول الصفحة ===== */
+.fade{
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== شريط Neon ثابت أعلى الصفحة ===== */
+.neon-navbar{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background: rgba(0,0,0,0.8);
+  border-bottom:2px solid #00ffff;
+  box-shadow: 0 0 20px #00ffff inset, 0 0 20px #00ffff;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:10px 0;
+  z-index:999;
+  animation: neonGlow 2s infinite alternate;
+}
+
+/* روابط داخل الشريط */
+.neon-navbar .nav-link{
+  color:#00ffff;
+  font-weight:bold;
+  text-decoration:none;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  text-shadow:0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  transition:0.3s;
+}
+
+.neon-navbar .nav-link:hover{
+  transform: scale(1.1);
+  text-shadow:0 0 15px #00ffff, 0 0 30px #00ffff, 0 0 50px #00ffff;
+}
+
+/* أيقونات */
+.nav-icon{
+  width:24px;
+  height:24px;
+}
+
+/* أنيميشن Neon للشريط */
+@keyframes neonGlow{
+  0% { box-shadow:0 0 10px #00ffff inset, 0 0 10px #00ffff; }
+  50% { box-shadow:0 0 20px #00ffff inset, 0 0 25px #00ffff; }
+  100% { box-shadow:0 0 30px #00ffff inset, 0 0 40px #00ffff; }
+}
